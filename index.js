@@ -13,8 +13,8 @@ function downloadYoutube(q, response) {
 
 	console.log("YouTube downloading", q);
 	let args = [
-		"-f", "bestaudio",
-		"-o", `${__dirname}/_youtube/%(title)s-%(id)s.%(ext)s`,
+		"-f", "bestaudio", "--add-metadata", "--restrict-filenames",
+		"-o", `${__dirname}/_youtube/%(artist)s - %(playlist)s/%(playlist_index)s - %(title)s - %(id)s.%(ext)s`,
 		q
 	]
 	let child = require("child_process").spawn(cmd, args);
