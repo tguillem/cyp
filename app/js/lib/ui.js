@@ -130,6 +130,15 @@ function addButton(type, what, parent) {
 	return button;
 }
 
+function updateButton(type, what, parent) {
+	let button = html.button({icon:"repeat", title:"Update directory"}, "", parent);
+	button.addEventListener("click", async e => {
+		e.stopPropagation();
+		mpd.command(`update ${what}`);
+	});
+	return button;
+}
+
 export function song(ctx, data, parent) {
 	let node = html.node("li", {className:"song"}, "", parent);
 	let info = html.node("div", {className:"info"}, "", node);
@@ -177,6 +186,8 @@ export function group(ctx, label, urlOrFilter, parent) {
 
 	playButton(type, urlOrFilter, node);
 	addButton(type, urlOrFilter, node);
+	if (ctx == CTX_FS)
+		updateButton(TYPE_URL, urlOrFilter, node);
 
 	return node;
 }
